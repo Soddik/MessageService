@@ -18,7 +18,6 @@
         <postgresql.driver.version>42.5.0</postgresql.driver.version>
         <jjwt.version>0.11.5</jjwt.version>
         <jacoco.version>0.8.3</jacoco.version>
-        <testcontainers.version>1.17.3</testcontainers.version>
     </properties>
     <dependencies>
         <dependency>
@@ -68,18 +67,6 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>${testcontainers.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${testcontainers.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
