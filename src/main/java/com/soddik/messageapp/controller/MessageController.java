@@ -3,6 +3,7 @@ package com.soddik.messageapp.controller;
 import com.soddik.messageapp.dto.MessageRequest;
 import com.soddik.messageapp.dto.MessageResponse;
 import com.soddik.messageapp.service.MessageService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +32,7 @@ public class MessageController {
             List<MessageResponse> messageResponseList = messageService.getLastXMessages(msgLimit);
             return messageResponseList.size() > 0 ? ResponseEntity.ok(messageResponseList) : ResponseEntity.noContent().build();
         } else {
-            return messageService.save(messageRequest).name() != null ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
+            return messageService.save(messageRequest) ? new ResponseEntity<>(HttpStatus.CREATED) : ResponseEntity.internalServerError().build();
         }
     }
 }
