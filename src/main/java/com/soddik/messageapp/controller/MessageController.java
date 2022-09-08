@@ -22,7 +22,7 @@ public class MessageController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> retrieveMessage(@RequestBody MessageRequest messageRequest) {
+    public ResponseEntity<?> registerMessage(@RequestBody MessageRequest messageRequest) {
         return checkMessageContent(messageRequest);
     }
 
