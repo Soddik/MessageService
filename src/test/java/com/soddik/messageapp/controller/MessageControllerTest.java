@@ -31,19 +31,19 @@ class MessageControllerTest {
     private MessageService service;
 
     @Test
-    void saveMessage() {
+    void givenMessageWhenRegisterMessageThanResponseCreated() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         setRequestAttributes(new ServletRequestAttributes(request));
         when(service.save(any(MessageRequest.class))).thenReturn(true);
 
         MessageRequest messageRequest = new MessageRequest("test_user_1", "test_msg");
-        ResponseEntity<?> responseEntity = controller.retrieveMessage(messageRequest);
+        ResponseEntity<?> responseEntity = controller.registerMessage(messageRequest);
 
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
     @Test
-    void testGetLastXMessages() {
+    void givenMessageContainsHistoryWhenRegisterMessageResponseOkAndReturnsNumberOfMessages() {
         int msgLimit = 3;
         List<MessageResponse> userResponseList = generateMessageResponseList(msgLimit);
 
@@ -52,7 +52,7 @@ class MessageControllerTest {
         when(service.getLastXMessages(any(Integer.class))).thenReturn(userResponseList);
 
         MessageRequest messageRequest = new MessageRequest("test_user_1", "history 3");
-        ResponseEntity<?> responseEntity = controller.retrieveMessage(messageRequest);
+        ResponseEntity<?> responseEntity = controller.registerMessage(messageRequest);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(((List<MessageResponse>) Objects.requireNonNull(responseEntity.getBody())).size()).isEqualTo(3);

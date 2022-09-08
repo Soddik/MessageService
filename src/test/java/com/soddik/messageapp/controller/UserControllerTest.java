@@ -30,7 +30,7 @@ class UserControllerTest {
     private AppUserService service;
 
     @Test
-    void register() {
+    void givenUserWhenRegisterUserThanReturnsCreated() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         setRequestAttributes(new ServletRequestAttributes(request));
         when(service.create(any(UserRequest.class))).thenReturn(new UserResponse(1L, "test_user_1"));
@@ -45,7 +45,7 @@ class UserControllerTest {
     }
 
     @Test
-    void getAllUsers() {
+    void whenGetAllUsersThanReturnOkAndAllUsers() {
         List<UserResponse> userResponseList = List.of(
                 new UserResponse(1L, "test_user_1"),
                 new UserResponse(2L, "test_user_2")
