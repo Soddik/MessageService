@@ -19,6 +19,12 @@ public class Message {
     public Message() {
     }
 
+    public Message(Long id, String content, AppUser owner) {
+        this.id = id;
+        this.content = content;
+        this.owner = owner;
+    }
+
     public Long getId() {
         return id;
     }
