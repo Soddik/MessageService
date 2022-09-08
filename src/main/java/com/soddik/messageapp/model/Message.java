@@ -19,10 +19,14 @@ public class Message {
     public Message() {
     }
 
-    public Message(Long id, String content, AppUser owner) {
-        this.id = id;
+    public Message(String content, AppUser owner) {
         this.content = content;
         this.owner = owner;
+    }
+
+    public Message(Long id, String content, AppUser owner) {
+        this(content, owner);
+        this.id = id;
     }
 
     public Long getId() {
