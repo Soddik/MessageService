@@ -24,6 +24,8 @@ public class JwtProvider {
     @Value("${jwt.secret}")
     private String secret;
 
+    private final Key key = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
+
     public JwtProvider(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -37,7 +39,7 @@ public class JwtProvider {
     public String createToken(String name) {
         Claims claims = Jwts.claims().setSubject(name);
         Date iat = new Date(System.currentTimeMillis());
-        Key key = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(iat)
@@ -48,7 +50,6 @@ public class JwtProvider {
 
     public Boolean validateToken(String token) {
         try {
-            Key key = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
             Jws<Claims> claimsJws = Jwts.parserBuilder()
                     .setSigningKey(key).build()
                     .parseClaimsJws(token);
@@ -65,7 +66,6 @@ public class JwtProvider {
     }
 
     public String getUserName(String token) {
-        Key key = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
     }
 }
