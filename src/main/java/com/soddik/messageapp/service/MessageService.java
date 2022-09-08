@@ -23,11 +23,11 @@ public class MessageService {
     }
 
 
-    public MessageResponse save(MessageRequest messageRequest) {
+    public Boolean save(MessageRequest messageRequest) {
         Message message = new Message();
         message.setContent(messageRequest.content());
         message.setOwner(appUserRepository.findByName(messageRequest.name()).orElseThrow(() -> new UsernameNotFoundException("User doesnt exists.")));
-        return MessageMapper.toDto(messageRepository.save(message));
+        return messageRepository.save(message).getId() != null;
     }
 
     public List<MessageResponse> getLastXMessages(Integer msgLimit) {
