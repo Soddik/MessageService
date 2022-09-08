@@ -36,7 +36,7 @@ public class AuthController {
             AppUser user = authUserService.findByName(request.name());
             String token = jwtProvider.createToken(user.getName());
 
-            return ResponseEntity.ok(new JwtResponse(token));
+            return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
         } catch (AuthenticationException e) {
             return new ResponseEntity<>("Invalid name/password", HttpStatus.FORBIDDEN);
         }
