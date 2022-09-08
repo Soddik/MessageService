@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.soddik</groupId>
     <artifactId>MessageService</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>MessageService</name>
     <description>JWT auth based message service</description>
     <properties>
