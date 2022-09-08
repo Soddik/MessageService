@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class MessageService {
     private final MessageRepository messageRepository;
-    // TODO: 07.09.2022 bad practice 
     private final AppUserRepository appUserRepository;
 
     public MessageService(MessageRepository messageRepository, AppUserRepository appUserRepository) {
