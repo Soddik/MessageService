@@ -1,7 +1,6 @@
 package com.soddik.messageapp.security;
 
 import com.soddik.messageapp.exception.JwtAuthenticationException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -17,8 +16,6 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends GenericFilterBean {
-    @Value("${jwt.header}")
-    private String authHeader;
     private final JwtProvider jwtProvider;
 
     public JwtFilter(JwtProvider jwtProvider) {
@@ -28,6 +25,7 @@ public class JwtFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         try {
+            String authHeader = "Authorization";
             if (((HttpServletRequest) servletRequest).getHeader(authHeader) != null) {
                 String[] header = ((HttpServletRequest) servletRequest).getHeader(authHeader).split("_");
                 if (header.length < 2 || !header[0].equals("Bearer")) {

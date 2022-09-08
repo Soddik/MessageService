@@ -2,7 +2,6 @@ package com.soddik.messageapp.security;
 
 import com.soddik.messageapp.exception.JwtAuthenticationException;
 import io.jsonwebtoken.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,8 +20,7 @@ public class JwtProvider {
     private final UserDetailsService userDetailsService;
     //5h duration
     private static final long JWT_VALIDITY = 5 * 60 * 60;
-    @Value("${jwt.secret}")
-    private String secret;
+    private String secret ="supersecretkeysupersecretkeysupersecretkeysupersecretkey";
 
     private final Key key = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
 

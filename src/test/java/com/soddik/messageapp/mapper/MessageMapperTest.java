@@ -1,13 +1,11 @@
 package com.soddik.messageapp.mapper;
 
 import com.soddik.messageapp.dto.MessageResponse;
-import com.soddik.messageapp.dto.UserRequest;
-import com.soddik.messageapp.dto.UserResponse;
 import com.soddik.messageapp.model.AppUser;
 import com.soddik.messageapp.model.Message;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MessageMapperTest {
 
