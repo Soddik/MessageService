@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody UserRequest request) {
+    public ResponseEntity<?> register(@RequestBody UserRequest request) {
         try {
             if (request.name() == null || request.password() == null){
                 return ResponseEntity.badRequest().body("Wrong format: fields cannot be null.");
