@@ -12,7 +12,7 @@ Message Service that can retrieve messages from authenticated user and store mes
 - Spring Boot
 - JJWT
 - PostgreSQL
-### Prerequisites
+### Prerequisities
 - Java 17
 - Maven
 - PostgreSQL
