@@ -27,9 +27,6 @@ Build JAR file: in project directory run `./mvnw package -DskipTests` via CLI.
 
 Build JAR file and deploy in Docker: in project directory run `docker-compose up -d --build` via CLI.
 
-### Versioning
-Current version 0.0.1
-
 ## API documentation
 ### Endpoints
 | Endpoint              | Request Type | Auth.required * | Request body example                                    | Response code |              Description |
