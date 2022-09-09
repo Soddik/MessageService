@@ -27,12 +27,23 @@ public class MessageController {
     }
 
     private ResponseEntity<?> checkMessageContent(MessageRequest messageRequest) {
-        if (messageRequest.content().contains("history")) {
+        if (messageRequest.name() == null || messageRequest.content() == null){
+            return ResponseEntity.badRequest().body("Wrong format: fields cannot be null.");
+        }
+        if (isHistoryRequest(messageRequest)) {
             Integer msgLimit = Integer.valueOf(messageRequest.content().split(" ")[1]);
             List<MessageResponse> messageResponseList = messageService.getLastXMessages(msgLimit);
             return messageResponseList.size() > 0 ? ResponseEntity.ok(messageResponseList) : ResponseEntity.noContent().build();
         } else {
             return messageService.save(messageRequest) ? new ResponseEntity<>(HttpStatus.CREATED) : ResponseEntity.internalServerError().build();
         }
+    }
+
+    //parse messageRequest
+    private boolean isHistoryRequest(MessageRequest messageRequest) {
+        String[] split = messageRequest.content().trim().split(" ");
+        return messageRequest.content().startsWith("history")
+                && split.length == 2
+                && split[1].matches("\\d");
     }
 }

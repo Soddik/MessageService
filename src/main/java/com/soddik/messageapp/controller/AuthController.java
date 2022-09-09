@@ -1,7 +1,7 @@
 package com.soddik.messageapp.controller;
 
-import com.soddik.messageapp.dto.JwtRequest;
 import com.soddik.messageapp.dto.JwtResponse;
+import com.soddik.messageapp.dto.UserRequest;
 import com.soddik.messageapp.model.AppUser;
 import com.soddik.messageapp.security.JwtProvider;
 import com.soddik.messageapp.service.AuthUserService;
@@ -30,8 +30,12 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticate(@RequestBody JwtRequest request) {
+    public ResponseEntity<?> authenticate(@RequestBody UserRequest request) {
         try {
+            //all request fields != null
+            if (request.name() == null || request.password() == null){
+                return ResponseEntity.badRequest().body("Wrong format: fields cannot be null.");
+            }
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.name(), request.password()));
             AppUser user = authUserService.findByName(request.name());
             String token = jwtProvider.createToken(user.getName());
