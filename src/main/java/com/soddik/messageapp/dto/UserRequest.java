@@ -1,9 +1,7 @@
 package com.soddik.messageapp.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.Objects;
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public record UserRequest(String name, String password) {
     @Override
     public boolean equals(Object o) {
