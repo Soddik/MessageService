@@ -38,6 +38,7 @@ Current version 0.0.1
 | api/v1/users/register |     POST     |                 | `{"name":"name_example","password":"password_example"}` | 201           |        Register new user |
 | api/v1/auth/login     |     POST     |                 | `{"name":"name_example","password":"password_example"}` | 200           |              Returns jwt |
 | api/v1/message        |     POST     | +               | `{"name":"name_example","content":"msg_example"}`       | 201           | Logs an incoming message |
+
 *authentication via jwt
 
 If you send `{"name":"name_example","content":"history X"}`(where X is integer) on `api/v1/message` last X messages will be response
